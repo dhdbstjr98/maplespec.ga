@@ -58,10 +58,10 @@ services:
    - mariadb:/var/lib/mysql
    - ./config:/config
   environment:
-   MYSQL_ROOT_PASSWORD_FILE: ./config/db_password.txt
+   MYSQL_ROOT_PASSWORD_FILE: ./config/db_password.secret
    MYSQL_DATABASE: maple
    MYSQL_USER: maple
-   MYSQL_PASSWORD_FILE: ./config/db_password.txt
+   MYSQL_PASSWORD_FILE: ./config/db_password.secret
    TZ: Asia/Seoul
   command: --character_set_client=utf8 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --character-set-client-handshake=FALSE
   restart: on-failure

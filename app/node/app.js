@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 
 var db;
 
-fs.readFile('./config/db_password.txt', function(err, data) {
+fs.readFile('./config/db_password.secret', function(err, data) {
 	db = mysql.createConnection({
 	  host: "172.28.0.4",
 	  port: 3306,
