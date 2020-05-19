@@ -15,6 +15,15 @@ services:
   restart: on-failure
   links:
    - app
+ 
+ svelte:
+  image: node
+  container_name: svelte
+  working_dir: /var/www/html
+  volumes:
+   - ./web:/var/www/html
+  command: bash -c "npm install && npm run dev"
+  restart: on-failure
 
  app:
   image: node
