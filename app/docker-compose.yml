@@ -40,34 +40,7 @@ services:
   command: bash -c "npm install && node app.js"
   environment:
    - NODE_ENV=production
-  links:
-   - db
-  depends_on:
-   - db
   restart: on-failure
-
- db:
-  image: mariadb:10.2
-  container_name: mariadb10.2
-  ports:
-   - "33066:3306"
-  networks:
-   mynet:
-    ipv4_address: 172.28.0.4
-  volumes:
-   - mariadb:/var/lib/mysql
-   - ./config:/config
-  environment:
-   MYSQL_ROOT_PASSWORD_FILE: ./config/db_password.secret
-   MYSQL_DATABASE: maple
-   MYSQL_USER: maple
-   MYSQL_PASSWORD_FILE: ./config/db_password.secret
-   TZ: Asia/Seoul
-  command: --character_set_client=utf8 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --character-set-client-handshake=FALSE
-  restart: on-failure
-
-volumes:
-  mariadb:
 
 networks:
   mynet:
