@@ -1,0 +1,2 @@
+/app/config/*.secret
+/app/node/node_modules
