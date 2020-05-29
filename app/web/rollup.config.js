@@ -3,6 +3,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
+import copy from 'rollup-plugin-copy';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -35,6 +36,12 @@ export default {
 			dedupe: ['svelte']
 		}),
 		commonjs(),
+
+		copy({
+			targets:[
+				{ src:'src/images', dest:'public' }
+			]
+		}),
 
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated
