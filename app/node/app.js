@@ -1,8 +1,11 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
+let express = require('express');
+let app = express();
+let bodyParser = require('body-parser');
+let routes = require('./routes');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-var server = app.listen(80);
+app.get('/api/home', routes.home);
+
+let server = app.listen(80);
