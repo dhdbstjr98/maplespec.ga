@@ -1,7 +1,7 @@
-import Home from './routes/Home.svelte';
+import Search from './routes/Search.svelte';
 
 const routes = {
-  '/': Home,
+  '/': Search,
 };
 
 export default routes;
