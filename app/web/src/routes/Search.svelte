@@ -5,7 +5,7 @@
 
   function searchCharacter() {
     if(!character) {
-      M.toast({html:"닉네임을 입력해주세요."});
+      M.toast({html:"캐릭터명을 입력해주세요."});
       return false;
     }
 
