@@ -37,7 +37,7 @@ services:
   volumes:
    - ./node:/app
    - ./config:/app/config
-  command: bash -c "npm install && node app.js"
+  command: bash -c "npm install && node_modules/.bin/nodemon app.js"
   environment:
    - NODE_ENV=production
   restart: on-failure
