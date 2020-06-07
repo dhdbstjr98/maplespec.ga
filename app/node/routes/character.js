@@ -110,7 +110,8 @@ const analyzeEquipment = async function(nickname, characterCode, job) {
     let majorArcane = 0;
     const arcaneURLs = [];
     $(".tab03_con_wrap .arcane_weapon_wrap .item_pot li span a").each(async function() {
-      arcaneURLs.push("https://maplestory.nexon.com" + $(this).attr("href"));
+      if (!!$(this).attr("href"))
+        arcaneURLs.push("https://maplestory.nexon.com" + $(this).attr("href"));
     });
 
     for (let i = 0; i < arcaneURLs.length; i++) {
