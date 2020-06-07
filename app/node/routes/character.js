@@ -94,6 +94,99 @@ const getCharacterInfo = async function(nickname, characterCode) {
   }
 }
 
+const analyzeEquipment = async function(nickname, characterCode, job) {
+  try {
+    const resp = await axios.get("https://maplestory.nexon.com/Common/Character/Detail/" + encodeURI(nickname) + "/Equipment?p=" + characterCode);
+
+    if (resp.data.indexOf("공개하지 않은 정보입니다.") > 0) {
+      throw new Error("private_character");
+    }
+
+    const { JSDOM } = require('jsdom');
+    const dom = new JSDOM(resp.data);
+    const $ = (require('jquery'))(dom.window);
+
+    // 아케인심볼 분석
+    let majorArcane = 0;
+    const arcaneURLs = [];
+    $(".tab03_con_wrap .arcane_weapon_wrap .item_pot li span a").each(async function() {
+      arcaneURLs.push("https://maplestory.nexon.com" + $(this).attr("href"));
+    });
+
+    for (let i = 0; i < arcaneURLs.length; i++) {
+      const equipmentResp = await axios.get(arcaneURLs[i], {
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      });
+
+      const equipmentDom = new JSDOM(equipmentResp.data.view);
+      const $equipment = (require('jquery'))(equipmentDom.window);
+
+      majorArcane += parseInt($equipment(".stet_info ul li:eq(2) .point_td font:eq(0)").text().substring(1));
+    }
+
+    // 장비 분석
+    const jobModel = require('../model/job');
+
+    let damagePercent = 0;
+    let majorPercent = 0;
+    let attackPowerPercent = 0;
+    const equipmentURLs = [];
+    $(".tab01_con_wrap .weapon_wrap .item_pot li span a").each(async function() {
+      equipmentURLs.push("https://maplestory.nexon.com" + $(this).attr("href"));
+    });
+
+    for (let i = 0; i < equipmentURLs.length; i++) {
+      const equipmentResp = await axios.get(equipmentURLs[i], {
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      });
+
+      const equipmentDom = new JSDOM(equipmentResp.data.view);
+      const $equipment = (require('jquery'))(equipmentDom.window);
+
+      $equipment(".stet_info ul li").each(function() {
+        const regexMajor1 = new RegExp(`${jobModel[job].major} : \\+(\\d)%`);
+        const regexMajor2 = new RegExp(`올스탯 : \\+(\\d)%`);
+        const regexAttackPower = (jobModel[job].major == "INT") ?
+          new RegExp(`마력 : \\+(\\d)%`) :
+          new RegExp(`공격력 : \\+(\\d)%`);
+        const regexDamage = new RegExp(`데미지 : \\+(\\d)%`);
+
+        if ($(this).find(".stet_th span").text() == "올스탯") {
+          majorPercent += parseInt($(this).find(".point_td font:eq(0)").text().substring(1));
+        } else if ($(this).find(".stet_th span").text().indexOf("잠재옵션") >= 0) {
+          const values = $(this).find(".point_td").html().split("<br>");
+          for (let j = 0; j < values.length; j++) {
+            const value = values[j].trim();
+            let regexResult;
+
+            if (regexResult = (regexMajor1.exec(value) || regexMajor2.exec(value))) {
+              majorPercent += parseInt(regexResult[1]);
+            } else if (regexResult = regexAttackPower.exec(value)) {
+              attackPowerPercent += parseInt(regexResult[1]);
+            } else if (regexResult = regexDamage.exec(value)) {
+              damagePercent += parseInt(regexResult[1]);
+            }
+          }
+        }
+      })
+    }
+
+    return {
+      majorArcane: majorArcane,
+      majorPercent: majorPercent,
+      attackPowerPercent: attackPowerPercent,
+      damagePercent: damagePercent
+    };
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
 module.exports = {
   getCharacter: async function(req, res) {
     if (!req.query.nickname) {
@@ -114,6 +207,13 @@ module.exports = {
       res.status(403).send();
       return;
     }
+
+    const analysisEquipment = await analyzeEquipment(nickname, characterCode, characterInfo.character.job);
+    if (!analysisEquipment) {
+      res.status(403).send();
+      return;
+    }
+    console.log(analysisEquipment);
 
     res.send(characterInfo);
   }
