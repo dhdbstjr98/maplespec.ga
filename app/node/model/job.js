@@ -12,12 +12,11 @@ module.exports = {
       },
       active: {
         attackPower: {
-          pure: 115, // 시그너스, 전설의영웅비약, 길드의더큰축복, 익스트림
           percent: 4 // 영웅의메아리
         },
         damage: {
           all: 137, // 아크, 일리움, 모험가마법사, 모험가도적, 카데나, 엔젤릭버스터, 길드노블레스
-          boss: 42 // 고급보스킬러의비약, 길드노블레스
+          boss: 22 // 고급보스킬러의비약, 길드노블레스
         },
         ignoreGuard: 9, // 모험가마법사
         criticalDamage: 30 // 길드노블레스
