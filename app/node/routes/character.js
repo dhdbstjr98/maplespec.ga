@@ -26,10 +26,18 @@ const getCharacterInfo = async function(nickname, characterCode) {
     }
 
     const character = {
-      'nickname': nickname,
-      'characterCode': characterCode
+      nickname: nickname,
+      characterCode: characterCode
     };
-    const stats = {};
+    const stats = {
+      major: 0,
+      minor: 0,
+      majorHyper: 0,
+      criticalDamage: 0,
+      bossAttackDamage: 0,
+      ignoreGuard: 0,
+      statAttackPower: 0
+    };
 
     const { JSDOM } = require('jsdom');
     const dom = new JSDOM(resp.data);
