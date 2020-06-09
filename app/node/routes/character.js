@@ -33,6 +33,7 @@ const getCharacterInfo = async function(nickname, characterCode) {
       major: 0,
       minor: 0,
       majorHyper: 0,
+      damageHyper: 0,
       criticalDamage: 0,
       bossAttackDamage: 0,
       ignoreGuard: 0,
@@ -54,14 +55,16 @@ const getCharacterInfo = async function(nickname, characterCode) {
       if ($("th", this).length == 1) {
         if ($("th span", this).text() == "하이퍼스탯") {
           const values = $("td span", this).html().split("<br>");
-          const regex = new RegExp(`${statModel[jobModel[character.job].major].korean} (\\d+) 증가`);
+
+          const regexMajor = new RegExp(`${statModel[jobModel[character.job].major].korean} (\\d+) 증가`);
+          const regexDamage = new RegExp(`^데미지 (\\d+)% 증가`);
+
+          let regexResult;
           for (let i = 0; i < values.length; i++) {
-            const regexResult = regex.exec(values[i]);
-
-            if (!regexResult)
-              continue;
-
-            stats['majorHyper'] = parseInt(regexResult[1]);
+            if (regexResult = regexMajor.exec(values[i]))
+              stats['majorHyper'] = parseInt(regexResult[1]);
+            else if (regexResult = regexDamage.exec(values[i]))
+              stats['damageHyper'] = parseInt(regexResult[1]);
           }
         }
       } else {
