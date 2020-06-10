@@ -27,7 +27,16 @@ const getCharacterInfo = async function(nickname, characterCode) {
 
     const character = {
       nickname: nickname,
-      characterCode: characterCode
+      characterCode: characterCode,
+      job: null,
+      level: null,
+      avatar: null,
+      server: {
+        icon: null,
+        name: null
+      },
+      majorName: null,
+      attackPowerName: null
     };
     const stats = {
       major: 0,
@@ -49,6 +58,13 @@ const getCharacterInfo = async function(nickname, characterCode) {
 
     character.job = $(".tab01_con_wrap .table_style01:eq(0) tbody tr:eq(0) td:eq(1) span").text();
     character.level = parseInt($(".char_info dl:eq(0) dd").text().substring(3));
+    character.avatar = $(".char_img img").attr("src");
+    character.server = {
+      name: $(".char_info dl:eq(2) dd").text(),
+      icon: $(".char_info dl:eq(2) dd img").attr("src")
+    };
+    character.majorName = jobModel[character.job].major;
+    character.attackPowerName = character.majorName == "INT" ? "마력" : "공격력";
 
     const $statInfo = $(".tab01_con_wrap .table_style01:eq(1)");
     $("tbody tr", $statInfo).each(function() {
@@ -56,7 +72,7 @@ const getCharacterInfo = async function(nickname, characterCode) {
         if ($("th span", this).text() == "하이퍼스탯") {
           const values = $("td span", this).html().split("<br>");
 
-          const regexMajor = new RegExp(`${statModel[jobModel[character.job].major].korean} (\\d+) 증가`);
+          const regexMajor = new RegExp(`${statModel[character.majorName].korean} (\\d+) 증가`);
           const regexDamage = new RegExp(`^데미지 (\\d+)% 증가`);
 
           let regexResult;
@@ -73,7 +89,7 @@ const getCharacterInfo = async function(nickname, characterCode) {
           const value = $(`td:eq(${i}) span`, this).text().replace(/\,/g, "");
 
           switch (statName) {
-            case jobModel[character.job].major:
+            case character.majorName:
               stats['major'] = parseInt(value);
               break;
             case jobModel[character.job].minor:
@@ -379,13 +395,16 @@ module.exports = {
     const buffEfficiency = calculateEfficiency(buffStats, characterInfo.character.job, analysisEquipment.weapon);
 
     res.send({
-      default: {
-        stats: stats,
-        efficiency: efficiency
-      },
-      buff: {
-        stats: buffStats,
-        efficiency: buffEfficiency
+      info: characterInfo.character,
+      analysis: {
+        default: {
+          stats: stats,
+          efficiency: efficiency
+        },
+        buff: {
+          stats: buffStats,
+          efficiency: buffEfficiency
+        }
       }
     });
   }
