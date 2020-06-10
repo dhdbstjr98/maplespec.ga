@@ -21,7 +21,7 @@ const getCharacterInfo = async function(nickname, characterCode) {
   try {
     const resp = await axios.get("https://maplestory.nexon.com/Common/Character/Detail/" + encodeURI(nickname) + "?p=" + characterCode);
 
-    if (resp.data.indexOf("공개하지 않은 정보입니다.") > 0) {
+    if (resp.data.indexOf("공개하지 않은 정보입니다.") >= 0) {
       throw new Error("private_character");
     }
 
@@ -125,7 +125,7 @@ const analyzeEquipment = async function(nickname, characterCode, job) {
   try {
     const resp = await axios.get("https://maplestory.nexon.com/Common/Character/Detail/" + encodeURI(nickname) + "/Equipment?p=" + characterCode);
 
-    if (resp.data.indexOf("공개하지 않은 정보입니다.") > 0) {
+    if (resp.data.indexOf("공개하지 않은 정보입니다.") >= 0) {
       throw new Error("private_character");
     }
 
