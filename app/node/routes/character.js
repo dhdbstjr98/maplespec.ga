@@ -25,6 +25,10 @@ const getCharacterInfo = async function(nickname, characterCode) {
       throw new Error("private_character");
     }
 
+    if (resp.data.indexOf("메이플스토리 게임 점검 중에는 이용하실 수 없습니다.") >= 0) {
+      throw new Error("game_checking");
+    }
+
     const character = {
       nickname: nickname,
       characterCode: characterCode,
@@ -117,7 +121,12 @@ const getCharacterInfo = async function(nickname, characterCode) {
     };
   } catch (error) {
     console.log(error);
-    return false;
+    if (error.message == "private_character")
+      return -1;
+    else if (error.message == "game_checking")
+      return -2;
+    else
+      return -999;
   }
 }
 
@@ -127,6 +136,10 @@ const analyzeEquipment = async function(nickname, characterCode, job) {
 
     if (resp.data.indexOf("공개하지 않은 정보입니다.") >= 0) {
       throw new Error("private_character");
+    }
+
+    if (resp.data.indexOf("메이플스토리 게임 점검 중에는 이용하실 수 없습니다.") >= 0) {
+      throw new Error("game_checking");
     }
 
     const { JSDOM } = require('jsdom');
@@ -218,7 +231,12 @@ const analyzeEquipment = async function(nickname, characterCode, job) {
     };
   } catch (error) {
     console.log(error);
-    return false;
+    if (error.message == "private_character")
+      return -1;
+    else if (error.message == "game_checking")
+      return -2;
+    else
+      return -999;
   }
 }
 
@@ -378,14 +396,30 @@ module.exports = {
     }
 
     const characterInfo = await getCharacterInfo(nickname, characterCode);
-    if (!characterInfo) {
+    if (characterInfo == -1) {
+      // 접근 권한 설정 필요
       res.status(403).send();
+      return;
+    } else if (characterInfo == -2) {
+      // 점검중
+      res.status(503).send();
+      return;
+    } else if (characterInfo < 0) {
+      res.status(400).send();
       return;
     }
 
     const analysisEquipment = await analyzeEquipment(nickname, characterCode, characterInfo.character.job);
-    if (!analysisEquipment) {
+    if (analysisEquipment == -1) {
+      // 접근 권한 설정 필요
       res.status(403).send();
+      return;
+    } else if (analysisEquipment == -2) {
+      // 점검중
+      res.status(503).send();
+      return;
+    } else if (analysisEquipment < 0) {
+      res.status(400).send();
       return;
     }
 
