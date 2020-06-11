@@ -262,7 +262,7 @@ const analyzeStats = function(characterInfo, analysisEquipment) {
       boss: characterInfo.stats.bossAttackDamage
     },
     finalDamage: job.stats.passive.finalDamage,
-    criticalDamage: characterInfo.stats.criticalDamage,
+    criticalDamage: characterInfo.stats.criticalDamage + jobDefault.stats.passive.criticalDamage,
     attackPower: {
       pure: 0,
       percent: analysisEquipment.attackPowerPercent +
@@ -272,7 +272,8 @@ const analyzeStats = function(characterInfo, analysisEquipment) {
   };
 
   stats.major.added = characterInfo.stats.majorHyper +
-    analysisEquipment.majorArcane;
+    analysisEquipment.majorArcane +
+    jobDefault.stats.passive.major.added;
   stats.major.pure = (characterInfo.stats.major - stats.major.added) / (1 + stats.major.percent / 100);
 
   stats.attackPower.pure = characterInfo.stats.statAttackPower * 100 / (characterInfo.stats.major * 4 + stats.minor) / job.jobConst / weaponConst / (1 + stats.attackPower.percent / 100) / (1 + stats.damage.all / 100) / (1 + stats.finalDamage / 100);
