@@ -376,7 +376,7 @@ const calculatePower = function(stats, job, weapon) {
     weaponConst *
     (1 + stats.damage.all / 100 + stats.damage.boss / 100) *
     (1 + stats.finalDamage / 100) *
-    (1.2 + stats.criticalDamage / 100) *
+    (1.35 + stats.criticalDamage / 100) *
     (1 - 3 * (1 - stats.ignoreGuard / 100)),
     1);
 }
