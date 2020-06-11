@@ -2,13 +2,15 @@ module.exports = {
   default: {
     jobConst: 1,
     stats: {
-      passive: { // 데몬슬레이어, 키네시스 링크는 스탯창에 반영되었으므로 제외
+      passive: { // 데몬슬레이어, 키네시스, 시그너스 링크는 스탯창에 반영되었으므로 제외
         major: {
-          percent: 5 // 제논
+          percent: 0, // 제논 링크는 수치가 이상하게 나오기 때문에 제외
+          added: 200 // 유니온 공격대원 평균
         },
         damage: {
           all: 10 // 데몬어벤져
-        }
+        },
+        criticalDamage: 0
       },
       active: {
         attackPower: {
@@ -599,7 +601,7 @@ module.exports = {
         damage: {
           all: 0
         },
-        finalDamage: 0
+        finalDamage: 25
       },
       active: {
         major: {
