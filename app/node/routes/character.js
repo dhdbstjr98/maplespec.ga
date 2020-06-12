@@ -8,12 +8,12 @@ const crwalCharacterCode = async function(nickname) {
     const regexResult = regex.exec(resp.data);
 
     if (!regexResult)
-      return false;
+      return -2;
 
     return regexResult[1];
   } catch (error) {
     console.log(error);
-    return false;
+    return -1;
   }
 }
 
@@ -391,7 +391,10 @@ module.exports = {
     const nickname = req.query.nickname;
     const characterCode = await crwalCharacterCode(req.query.nickname);
 
-    if (!characterCode) {
+    if (characterCode == -1) {
+      res.status(500).send();
+      return;
+    } else if (characterCode == -2) {
       res.status(404).send();
       return;
     }
@@ -429,7 +432,7 @@ module.exports = {
     const efficiency = calculateEfficiency(stats, characterInfo.character.job, analysisEquipment.weapon);
     const buffEfficiency = calculateEfficiency(buffStats, characterInfo.character.job, analysisEquipment.weapon);
 
-    res.send({
+    const result = {
       info: characterInfo.character,
       analysis: {
         default: {
@@ -441,6 +444,9 @@ module.exports = {
           efficiency: buffEfficiency
         }
       }
-    });
+    };
+
+    console.log(JSON.stringify(result));
+    res.send(result);
   }
 };
