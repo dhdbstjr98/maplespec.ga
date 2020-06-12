@@ -38,6 +38,10 @@
             </p>
             <p>
               <a href="https://maplestory.nexon.com/MyMaple/Account/Character/Visibility" target="_BLANK">공개설정하러 가기</a>
+            </p> 
+            <p class="red-text text-accent-1">
+              <i class="material-icons">info_outline</i>
+              <span>제논, 데몬어벤져는 지원하지 않습니다.</span>
             </p>
           </div>
         </div>
@@ -47,9 +51,11 @@
 </section>
 
 <style>
-section { width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; }
-.search-box { width:100%; }
+section { width:100%; height:100%; display:flex; flex-direction:column; }
+.search-box { width:100%; margin:auto 0; }
 h4 { font-size:20px; text-align:center; }
 .input-field { padding-right:70px; }
 .input-field button { position:absolute; right:0; top:7px; }
+.card-action i.material-icons { font-size:1.1em; vertical-align:middle; }
+.card-action i.material-icons ~ span { vertical-align:middle; }
 </style>
