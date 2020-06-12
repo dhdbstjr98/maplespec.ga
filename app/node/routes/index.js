@@ -1,4 +1,4 @@
 let routes = {};
-routes.home = require('./home');
+routes.character = require('./character');
 
 module.exports = routes;
