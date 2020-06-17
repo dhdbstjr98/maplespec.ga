@@ -32,9 +32,9 @@ Docker를 사용하여 구동이 가능합니다. docker-compose가 사용이 �
 git clone http://khuhub.khu.ac.kr/2017104005/oss-maple.git
 ```
 
-2. branch release
+2. checkout release
 ```
-git branch release
+git checkout release
 ```
 
 3. docker on
