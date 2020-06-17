@@ -1,14 +1,18 @@
 axios = require('axios');
 
-const crwalCharacterCode = async function(nickname) {
+const crwalCharacterCode = async function(nickname, isReboot = false) {
   try {
-    const resp = await axios.get("https://maplestory.nexon.com/Ranking/World/Total?c=" + encodeURI(nickname));
+    const resp = await axios.get("https://maplestory.nexon.com/Ranking/World/Total?c=" + encodeURI(nickname) + "&w=" + (isReboot ? "0" : "254"));
 
     const regex = new RegExp(`<dt><a href=\\"\\/Common\\/Character\\/Detail\\/[^\\?]+?\\?p=(.+?)\\"\\s+target=.+?\\/>${nickname}<\\/a><\\/dt>`);
     const regexResult = regex.exec(resp.data);
 
-    if (!regexResult)
-      return -2;
+    if (!regexResult) {
+      if (isReboot)
+        return -2;
+      else
+        return await crwalCharacterCode(nickname, true);
+    }
 
     return regexResult[1];
   } catch (error) {
