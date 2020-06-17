@@ -249,6 +249,13 @@ const analyzeStats = function(characterInfo, analysisEquipment) {
   const job = jobModel[characterInfo.character.job];
   const jobDefault = jobModel.default;
   const weaponConst = require('../model/weapon')[analysisEquipment.weapon] || 1;
+
+  let rebootDamage = 0;
+  if (characterInfo.character.server.name.indexOf("리부트") == 0) {
+    // 리부트, 리부트2 월드 반영
+    rebootDamage = parseInt(characterInfo.character.level / 2);
+  }
+
   const stats = {
     major: {
       pure: 0,
@@ -262,7 +269,8 @@ const analyzeStats = function(characterInfo, analysisEquipment) {
       all: characterInfo.stats.damageHyper +
         analysisEquipment.damagePercent +
         job.stats.passive.damage.all +
-        jobDefault.stats.passive.damage.all,
+        jobDefault.stats.passive.damage.all +
+        rebootDamage,
       boss: characterInfo.stats.bossAttackDamage
     },
     finalDamage: job.stats.passive.finalDamage,
