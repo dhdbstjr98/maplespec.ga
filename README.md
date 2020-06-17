@@ -1,3 +1,12 @@
+# maplespec.ga
+
+메이플스토리 스펙업 효율을 계산해주는 웹 어플리케이션입니다.
+
+[View Demo](https://maplespec.ga)
+
+* 공개설정이 된 메이플스토리 캐릭터 이름(ex 88분고민한닉, 54분고민한닉, 72분고민한닉)을 입력하여 사용할 수 있습니다.
+* 해외에 서버가 있어 분석에 1분정도 시간이 소요됩니다.
+
 ## About The Project
 ![screenshot](images/screenshot.png)
 
@@ -36,12 +45,6 @@ docker-compose up
 4. (optional) 80(http) 또는 443(https) 포트로 포워딩
 
 포워딩하지 않은 경우 8081 포트로 프로젝트가 실행됩니다.
-
-## Preview
-
-[maplespec.ga](https://maplespec.ga)
-
-공개설정이 된 메이플스토리 캐릭터 이름(ex 88분고민한닉, 54분고민한닉, 72분고민한닉)을 입력하여 사용할 수 있습니다.
 
 ## Contributing
 
