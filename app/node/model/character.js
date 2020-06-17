@@ -61,8 +61,8 @@ const getCharacterInfo = async function(nickname, characterCode) {
     const dom = new JSDOM(resp.data);
     const $ = (require('jquery'))(dom.window);
 
-    const jobModel = require('../model/job');
-    const statModel = require('../model/stat');
+    const jobModel = require('./job');
+    const statModel = require('./stat');
 
     character.job = $(".tab01_con_wrap .table_style01:eq(0) tbody tr:eq(0) td:eq(1) span").text();
     character.level = parseInt($(".char_info dl:eq(0) dd").text().substring(3));
@@ -172,7 +172,7 @@ const analyzeEquipment = async function(nickname, characterCode, job) {
     }
 
     // 장비 분석
-    const jobModel = require('../model/job');
+    const jobModel = require('./job');
 
     let damagePercent = 0;
     let majorPercent = 0;
