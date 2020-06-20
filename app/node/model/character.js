@@ -119,6 +119,12 @@ const getCharacterInfo = async function(nickname, characterCode) {
       }
     });
 
+    stats.major = 0;
+
+    if (stats.major == 0) {
+      throw new Error("no_major_stats")
+    }
+
     return {
       character: character,
       stats: stats
@@ -129,6 +135,8 @@ const getCharacterInfo = async function(nickname, characterCode) {
       return -1;
     else if (error.message == "game_checking")
       return -2;
+    else if (error.message == "no_major_stats")
+      return -3;
     else
       return -999;
   }
