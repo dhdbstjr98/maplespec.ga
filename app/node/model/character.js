@@ -119,8 +119,6 @@ const getCharacterInfo = async function(nickname, characterCode) {
       }
     });
 
-    stats.major = 0;
-
     if (stats.major == 0) {
       throw new Error("no_major_stats")
     }
