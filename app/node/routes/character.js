@@ -28,6 +28,10 @@ module.exports = {
       // 점검중
       res.status(503).send();
       return;
+    } else if (characterInfo == -3) {
+      // 데이터를 받아오지 못함
+      res.status(502).send();
+      return;
     } else if (characterInfo < 0) {
       res.status(400).send();
       return;
