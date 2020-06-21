@@ -68,6 +68,12 @@ module.exports = {
       }
     };
 
+    if (result.analysis.default.stats.major.pure == null) {
+      // 데이터를 받아오지 못해 분석 실패
+      res.status(502).send();
+      return;
+    }
+
     console.log(JSON.stringify(result));
     res.send(result);
   }
