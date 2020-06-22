@@ -113,6 +113,10 @@
       }
     }).then(function(response) {
       character = response.data;
+      if(character.analysis.default.stats.major.pure == null) {
+        M.toast({html:"메이플스토리로부터 데이터를 받아오지 못했습니다.<br><br>잠시 후에 시도해주세요."});
+        push('/');
+      }
       isCharacterLoading = true;
     }).catch(function(error) {
       switch(error.response.status) {
