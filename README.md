@@ -7,6 +7,8 @@
 * 공개설정이 된 메이플스토리 캐릭터 이름(ex 88분고민한닉, 54분고민한닉, 72분고민한닉)을 입력하여 사용할 수 있습니다.
 * 해외에 서버가 있어 분석에 1분정도 시간이 소요됩니다.
 
+[View Presentation](oss-presentation.pptx)
+
 ## About The Project
 ![screenshot](images/screenshot.png)
 
