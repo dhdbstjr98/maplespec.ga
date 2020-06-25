@@ -28,6 +28,10 @@ module.exports = {
       // 점검중
       res.status(503).send();
       return;
+    } else if (characterInfo == -3) {
+      // 데이터를 받아오지 못함
+      res.status(502).send();
+      return;
     } else if (characterInfo < 0) {
       res.status(400).send();
       return;
@@ -63,6 +67,12 @@ module.exports = {
         }
       }
     };
+
+    if (result.analysis.default.stats.major.pure == null) {
+      // 데이터를 받아오지 못해 분석 실패
+      res.status(502).send();
+      return;
+    }
 
     console.log(JSON.stringify(result));
     res.send(result);

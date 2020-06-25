@@ -113,6 +113,10 @@
       }
     }).then(function(response) {
       character = response.data;
+      if(character.analysis.default.stats.major.pure == null) {
+        M.toast({html:"메이플스토리로부터 데이터를 받아오지 못했습니다.<br><br>잠시 후에 시도해주세요."});
+        push('/');
+      }
       isCharacterLoading = true;
     }).catch(function(error) {
       switch(error.response.status) {
@@ -124,6 +128,9 @@
           setTimeout(function() {
             window.open("https://maplestory.nexon.com/MyMaple/Account/Character/Visibility");
           }, 2000);
+          break;
+        case 502:
+          M.toast({html:"메이플스토리로부터 데이터를 받아오지 못했습니다.<br><br>잠시 후에 시도해주세요."});
           break;
         case 503:
           M.toast({html:"메이플스토리가 점검중입니다."});
