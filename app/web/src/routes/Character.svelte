@@ -225,48 +225,100 @@
                     <tbody>
                       <tr>
                         <th rowspan="2">{character.info.majorName} 1%</th>
+                        {#if !stats.efficiency.major.percent}
+                        <td>방무가 부족해 산출 불가</td>
+                        {:else}
                         <td>{character.info.majorName} {showValue(stats.efficiency.major.percent)}</td>
+                        {/if}
                       </tr>
                       <tr>
+                        {#if !stats.efficiency.major.percent}
+                        <td>방무가 부족해 산출 불가</td>
+                        {:else}
                         <td>{character.info.attackPowerName} {showValue(stats.efficiency.major.percent / stats.efficiency.attackPower.pure)}</td>
+                        {/if}
                       </tr>
                       <tr>
                         <th>{character.info.attackPowerName} 1</th>
+                        {#if !stats.efficiency.major.percent}
+                        <td>방무가 부족해 산출 불가</td>
+                        {:else}
                         <td>{character.info.majorName} {showValue(stats.efficiency.attackPower.pure)}</td>
+                        {/if}
                       </tr>
                       <tr>
                         <th rowspan="5">{character.info.attackPowerName} 1%</th>
+                        {#if !stats.efficiency.major.percent}
+                        <td>방무가 부족해 산출 불가</td>
+                        {:else}
                         <td>{character.info.majorName} {showValue(stats.efficiency.attackPower.percent)}</td>
+                        {/if}
                       </tr>
                       <tr>
+                        {#if !stats.efficiency.major.percent}
+                        <td>방무가 부족해 산출 불가</td>
+                        {:else}
                         <td>{character.info.majorName} {showValue(stats.efficiency.attackPower.percent / stats.efficiency.major.percent)}%</td>
+                        {/if}
                       </tr>
                       <tr>
+                        {#if !stats.efficiency.major.percent}
+                        <td>방무가 부족해 산출 불가</td>
+                        {:else}
                         <td>{character.info.attackPowerName} {showValue(stats.efficiency.attackPower.percent / stats.efficiency.attackPower.pure)}</td>
+                        {/if}
                       </tr>
                       <tr>
+                        {#if !stats.efficiency.major.percent}
+                        <td>방무가 부족해 산출 불가</td>
+                        {:else}
                         <td>데미지(보공) {showValue(stats.efficiency.attackPower.percent / stats.efficiency.damage)}%</td>
+                        {/if}
                       </tr>
                       <tr>
+                        {#if !stats.efficiency.major.percent}
+                        <td>방무가 부족해 산출 불가</td>
+                        {:else}
                         <td>방무 {showValue(stats.efficiency.attackPower.percent / stats.efficiency.ignoreGuard)}%</td>
+                        {/if}
                       </tr>
                       <tr>
                         <th rowspan="2">데미지(보공) 1%</th>
+                        {#if !stats.efficiency.major.percent}
+                        <td>방무가 부족해 산출 불가</td>
+                        {:else}
                         <td>{character.info.majorName} {showValue(stats.efficiency.damage)}</td>
+                        {/if}
                       </tr>
                       <tr>
+                        {#if !stats.efficiency.major.percent}
+                        <td>방무가 부족해 산출 불가</td>
+                        {:else}
                         <td>방무 {showValue(stats.efficiency.damage / stats.efficiency.ignoreGuard)}%</td>
+                        {/if}
                       </tr>
                       <tr>
                         <th rowspan="2">크뎀 1%</th>
+                        {#if !stats.efficiency.major.percent}
+                        <td>방무가 부족해 산출 불가</td>
+                        {:else}
                         <td>{character.info.majorName} {showValue(stats.efficiency.criticalDamage)}</td>
+                        {/if}
                       </tr>
                       <tr>
+                        {#if !stats.efficiency.major.percent}
+                        <td>방무가 부족해 산출 불가</td>
+                        {:else}
                         <td>{character.info.majorName} {showValue(stats.efficiency.criticalDamage / stats.efficiency.major.percent)}%</td>
+                        {/if}
                       </tr>
                       <tr>
                         <th>방무 1%</th>
+                        {#if !stats.efficiency.major.percent}
+                        <td>방무가 부족해 산출 불가</td>
+                        {:else}
                         <td>{character.info.majorName} {showValue(stats.efficiency.ignoreGuard)}</td>
+                        {/if}
                       </tr>
                     </tbody>
                   </table>
