@@ -31,7 +31,7 @@ Docker를 사용하여 구동이 가능합니다. docker-compose가 사용이 �
 ### Installation
 1. clone the repository
 ```
-git clone http://khuhub.khu.ac.kr/2017104005/oss-maple.git
+git clone https://github.com/dhdbstjr98/maplespec.ga.git
 ```
 
 2. checkout release
