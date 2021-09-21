@@ -4,42 +4,48 @@
 
 [View Demo](https://maplespec.ga)
 
-* 공개설정이 된 메이플스토리 캐릭터 이름(ex 88분고민한닉, 54분고민한닉, 72분고민한닉)을 입력하여 사용할 수 있습니다.
-* 해외에 서버가 있어 분석에 1분정도 시간이 소요됩니다.
+-   공개 설정이 된 메이플스토리 캐릭터 이름(ex 88분고민한닉, 54분고민한닉, 72분고민한닉)을 입력하여 사용할 수 있습니다.
+-   해외에 서버가 있어 분석에 1분 정도 시간이 소요됩니다.
 
 [View Presentation](oss-presentation.pptx)
 
 ## About The Project
+
 ![screenshot](images/screenshot.png)
 
-본 프로젝트는 메이플스토리 게임의 스펙을 계산하여 어떤 스탯을 올리는 것이 효율적인지를 계산해주는 툴입니다. 닉네임 입력만으로 간단하게 스탯 효율을 계산할 수 있습니다.
+본 프로젝트는 메이플스토리 게임의 스펙을 계산하여 어떤 스탯을 올리는 것이 효율적인지를 계산해 주는 툴입니다. 닉네임 입력만으로 간단하게 스탯 효율을 계산할 수 있습니다.
 
 ### Built With
-* [Docker](https://github.com/docker)
-* [Express](https://github.com/expressjs/express)
-* [Nginx](https://github.com/nginx/nginx)
-* [Svelte](https://github.com/sveltejs/svelte)
+
+-   [Docker](https://github.com/docker)
+-   [Express](https://github.com/expressjs/express)
+-   [Nginx](https://github.com/nginx/nginx)
+-   [Svelte](https://github.com/sveltejs/svelte)
 
 ## Getting Started
 
 ### Prerequisites
 
-* docker
+-   docker
 
 Docker를 사용하여 구동이 가능합니다. docker-compose가 사용이 가능한 환경이어야 합니다. [설치 안내](https://docs.docker.com/compose/install/)
 
 ### Installation
+
 1. clone the repository
+
 ```
 git clone https://github.com/dhdbstjr98/maplespec.ga.git
 ```
 
 2. checkout release
+
 ```
 git checkout release
 ```
 
 3. docker on
+
 ```
 docker-compose up
 ```
@@ -62,5 +68,5 @@ docker-compose up
 
 ## Contact
 
-* 오윤석, dhdbstjr98@khu.ac.kr
-* 오윤석, admin@com1.kr
+-   오윤석, dhdbstjr98@khu.ac.kr
+-   오윤석, admin@com1.kr
