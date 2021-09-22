@@ -1,6 +1,6 @@
 # maplespec.ga
 
-메이플스토리 스펙업 효율을 계산해주는 웹 어플리케이션입니다.
+메이플스토리 스펙업 효율을 계산해 주는 웹 애플리케이션입니다.
 
 [View Demo](https://maplespec.ga)
 
